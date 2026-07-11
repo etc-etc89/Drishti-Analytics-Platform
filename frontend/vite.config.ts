@@ -3,13 +3,16 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   tanstackStart: {
-    // Keep the server entry so the framework doesn't crash (fixes the rolldown error)
     server: { entry: "server" },
   },
   nitro: {
-    // Tell Nitro NOT to render the React code during the build process
+    // 1. Tell Nitro NOT to render the React code dynamically
     routeRules: {
       '/**': { ssr: false }
+    },
+    // 2. Force Nitro to generate a blank SPA fallback file named 200.html
+    prerender: {
+      routes: ['/200.html']
     }
   }
 });
