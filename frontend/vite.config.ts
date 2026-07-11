@@ -3,13 +3,13 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   tanstackStart: {
+    // Keep the server entry so the framework doesn't crash (fixes the rolldown error)
     server: { entry: "server" },
   },
   nitro: {
-    // Tell Nitro to generate a static HTML file of our routes at the end of the build
-    prerender: {
-      routes: ['/'],
-      crawlLinks: true
+    // Tell Nitro NOT to render the React code during the build process
+    routeRules: {
+      '/**': { ssr: false }
     }
   }
 });
