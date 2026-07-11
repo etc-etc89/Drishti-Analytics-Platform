@@ -3,12 +3,10 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   tanstackStart: {
-    // 1. Completely disable the SSR build step (fixes the rolldown error)
-    ssr: false, 
+    server: { entry: "server" },
   },
   nitro: {
-    // 2. Force the output to be a static site (generates the missing index.html)
-    preset: 'static', 
+    // Tell Nitro to generate a static HTML file of our routes at the end of the build
     prerender: {
       routes: ['/'],
       crawlLinks: true
